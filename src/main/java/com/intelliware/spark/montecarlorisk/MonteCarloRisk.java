@@ -52,8 +52,6 @@ public class MonteCarloRisk {
 		// Cache the results so that we don't recompute for both of the summarizations below
 	    trialsRdd.cache();
 	    
-	    System.out.println("trialsRDD: "+ trialsRdd.collect());
-	    
 	    // Calculate VaR
 	    List<Double> varFivePercentList = trialsRdd.takeOrdered(Math.max(numTrials / 20, 1));
 	    System.out.println("VaR List: "+ varFivePercentList);
@@ -80,8 +78,6 @@ public class MonteCarloRisk {
 	public static double[] trialValues(long seed, int numTrials, Instrument[] instruments, 
 			double[] factorMeans, double[][] factorCovariances) {
 
-		System.out.println("trialValues: seed: "+seed+", numTrials:"+numTrials+", instruments:"+Arrays.toString(instruments)
-						+ ", factorMeans:" + Arrays.toString(factorMeans) +", factorCovariances:");
 		Arrays.stream(factorCovariances).forEach(i -> System.out.println(Arrays.toString(i)));
 		
 		MersenneTwister rand = new MersenneTwister();
