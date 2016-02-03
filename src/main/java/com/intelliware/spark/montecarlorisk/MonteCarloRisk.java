@@ -54,7 +54,6 @@ public class MonteCarloRisk {
 	    
 	    // Calculate VaR
 	    List<Double> varFivePercentList = trialsRdd.takeOrdered(Math.max(numTrials / 20, 1));
-	    System.out.println("VaR List: "+ varFivePercentList);
 	    Double varFivePercent = (Double)varFivePercentList.get(varFivePercentList.size()-1);
 	    System.out.println("VaR: "+ varFivePercent);
 	    
@@ -78,8 +77,6 @@ public class MonteCarloRisk {
 	public static double[] trialValues(long seed, int numTrials, Instrument[] instruments, 
 			double[] factorMeans, double[][] factorCovariances) {
 
-		Arrays.stream(factorCovariances).forEach(i -> System.out.println(Arrays.toString(i)));
-		
 		MersenneTwister rand = new MersenneTwister();
 		MultivariateNormalDistribution multivariateNormal = new MultivariateNormalDistribution(rand, 
 				factorMeans, factorCovariances);
@@ -90,8 +87,6 @@ public class MonteCarloRisk {
 			double[] trial = multivariateNormal.sample();
 			trialValues[i] = trialValue(trial, instruments);
 		});
-		
-		System.out.println("trialValues: "+Arrays.toString(trialValues));
 		
 		return trialValues;
 	}
