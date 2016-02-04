@@ -23,7 +23,10 @@ import org.apache.spark.broadcast.Broadcast;
 public class MonteCarloRisk {
 	
 	public static void main(String s[]) throws Exception {
-		SparkConf conf = new SparkConf().setAppName("MonteCarloRiskJava").setMaster("local");
+		SparkConf conf = new SparkConf().setAppName("MonteCarloRiskJava");
+		// to run in eclipse, uncomment the following line
+		// conf.setMaster("local");
+		
 		JavaSparkContext sc = new JavaSparkContext(conf);
 		
 		Instrument[] instruments = readInstruments(s[0]);
